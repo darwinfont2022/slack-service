@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: slack-service
+
+slack:
+  webhook_url: ${SLACK_WEBHOOK_URL}
+  token: ${SLACK_TOKEN}
+  signed_secret: ${SLACK_SIGNET_SECRET}
+
