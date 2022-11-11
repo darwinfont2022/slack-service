@@ -1,19 +1,16 @@
 package com.darwinfont.slackservice.client.dto;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
+
 @Slf4j
 public class MessageModel {
     public List<Object> blocks;
 
-    public MessageModel() {
-        this.blocks = new ArrayList<>();
+    public List<Object> getBlocks() {
+        return blocks;
     }
 
     private MessageModel(MessageBuilder builder) {
@@ -28,6 +25,8 @@ public class MessageModel {
     public static class MessageBuilder {
         public List<Object> blocks;
 
+        private boolean clean;
+
         public MessageBuilder() {
             this.blocks = new ArrayList<>();
             this.blocks.add(
@@ -36,10 +35,19 @@ public class MessageModel {
                             .text(" ")
                             .build()
             );
+            this.clean = true;
         }
 
         public MessageBuilder header(HeaderBlock header) {
-            this.blocks.add(header);
+            if (clean) {
+                this.blocks.clear();
+                this.blocks.add(header);
+                this.clean = false;
+            } else {
+                this.blocks.add(header);
+            }
+
+
             return this;
         }
 
@@ -50,7 +58,13 @@ public class MessageModel {
         }
 
         public MessageBuilder sections(List<SectionBlock> sections) {
-            this.blocks.addAll(sections);
+            if (clean) {
+                this.blocks.clear();
+                this.blocks.addAll(sections);
+                this.clean = false;
+            } else {
+                this.blocks.addAll(sections);
+            }
             return this;
         }
 

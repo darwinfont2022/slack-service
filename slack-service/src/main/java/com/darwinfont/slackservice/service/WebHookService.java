@@ -37,10 +37,8 @@ public class WebHookService {
         var messageBuilded = MessageModel
                 .builder()
                 .header(header)
-//                .section(section)
+                .section(section)
                 .build();
-
-        log.info(messageBuilded.toString());
 
         return this.webHookClient.createMessage(messageBuilded);
     }
