@@ -1,4 +1,4 @@
-package com.darwinfont.slackservice.client.dto;
+package com.darwinfont.slackservice.client.dto.text;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,11 +1,11 @@
 package com.darwinfont.slackservice.client.dto;
 
-import lombok.extern.slf4j.Slf4j;
+import com.darwinfont.slackservice.client.dto.image.ImageBlock;
+import com.darwinfont.slackservice.client.dto.header.HeaderBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 public class MessageModel {
     public List<Object> blocks;
 
@@ -47,17 +47,16 @@ public class MessageModel {
                 this.blocks.add(header);
             }
 
-
             return this;
         }
 
-        public MessageBuilder section(SectionBlock section) {
+        public MessageBuilder section(Object section) {
             this.blocks.clear();
             this.blocks.add(section);
             return this;
         }
 
-        public MessageBuilder sections(List<SectionBlock> sections) {
+        public MessageBuilder sections(List<Object> sections) {
             if (clean) {
                 this.blocks.clear();
                 this.blocks.addAll(sections);
@@ -65,6 +64,19 @@ public class MessageModel {
             } else {
                 this.blocks.addAll(sections);
             }
+
+            return this;
+        }
+
+        public MessageBuilder image(ImageBlock image) {
+            if (clean) {
+                this.blocks.clear();
+                this.blocks.add(image);
+                this.clean = false;
+            } else {
+                this.blocks.add(image);
+            }
+
             return this;
         }
 

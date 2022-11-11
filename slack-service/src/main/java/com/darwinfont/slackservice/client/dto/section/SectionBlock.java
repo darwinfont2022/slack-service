@@ -1,41 +1,40 @@
-package com.darwinfont.slackservice.client.dto;
+package com.darwinfont.slackservice.client.dto.section;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.darwinfont.slackservice.client.dto.type.BlockType;
+import com.darwinfont.slackservice.client.dto.text.TextBlock;
+import com.darwinfont.slackservice.client.dto.type.TextType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-//@Getter
-//@Setter
-@Data
 public class SectionBlock {
-    private String type;
-    private TextBlock text;
-    private List<TextBlock> fields;
+    private final String type;
+    private final TextBlock text;
+    private final List<Object> fields;
 
-    private SectionBlock(String type, TextBlock text, List<TextBlock> fields){
-        this.type = type;
-        this.text = text;
-        this.fields = fields;
+    public String getType() {
+        return this.type;
+    }
+
+    public TextBlock getText() {
+        return this.text;
+    }
+
+    public List<Object> getFields() {
+        return this.fields;
     }
 
     private SectionBlock(SectionBlockBuilder builder) {
-        this.type = builder.type;
+        this.type = BlockType.SECTION;
         this.text = builder.text;
         this.fields = builder.fields;
     }
 
     public static class SectionBlockBuilder {
-        private String type;
         private TextBlock text;
-        private List<TextBlock> fields;
+        private List<Object> fields;
 
         public SectionBlockBuilder() {
-            this.type = BlockType.SECTION;
             this.text = TextBlock
                     .builder()
                     .type(TextType.TEXT)
@@ -57,7 +56,7 @@ public class SectionBlock {
         }
 
         public SectionBlockBuilder fields(List<TextBlock> fields) {
-            this.fields = fields;
+            this.fields.addAll(fields);
             return this;
         }
 
@@ -70,12 +69,4 @@ public class SectionBlock {
         return new SectionBlockBuilder();
     }
 
-    public String toString(){
-        return "{\n\ttype: " + this.type
-                + "\n\ttext: {\n\t\ttype: " + this.text.getType()
-                + "\n\t\ttext: " + this.text.getText()
-                + "\n\t},\n\tfields: ["
-                + this.fields.stream().map(TextBlock::toString).collect(Collectors.joining(","))
-                + "\n\t]\n}";
-    }
 }

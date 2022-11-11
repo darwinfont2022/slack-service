@@ -1,4 +1,4 @@
-package com.darwinfont.slackservice.client.dto;
+package com.darwinfont.slackservice.client.dto.type;
 
 public class TextType {
     public static final String TEXT = "plain_text";

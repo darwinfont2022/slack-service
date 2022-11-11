@@ -1,4 +1,8 @@
-package com.darwinfont.slackservice.client.dto;
+package com.darwinfont.slackservice.client.dto.header;
+
+import com.darwinfont.slackservice.client.dto.type.BlockType;
+import com.darwinfont.slackservice.client.dto.text.TextBlock;
+import com.darwinfont.slackservice.client.dto.type.TextType;
 
 public class HeaderBlock {
     private final String type;
