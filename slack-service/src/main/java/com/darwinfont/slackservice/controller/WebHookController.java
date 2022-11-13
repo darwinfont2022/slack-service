@@ -18,7 +18,7 @@ public class WebHookController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> sendMessage(@RequestBody RequestDtoIn message){
+    public ResponseEntity<Object> sendMessage(@RequestBody RequestDtoIn message){
         return ResponseEntity.ok(this.webHookService.sendMessage(message));
     }
 }

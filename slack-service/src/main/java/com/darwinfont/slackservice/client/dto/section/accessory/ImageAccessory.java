@@ -1,4 +1,4 @@
-package com.darwinfont.slackservice.client.dto.image;
+package com.darwinfont.slackservice.client.dto.section.accessory;
 
 import com.darwinfont.slackservice.client.dto.type.BlockType;
 

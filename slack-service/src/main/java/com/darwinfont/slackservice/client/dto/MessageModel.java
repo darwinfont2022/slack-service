@@ -2,6 +2,7 @@ package com.darwinfont.slackservice.client.dto;
 
 import com.darwinfont.slackservice.client.dto.image.ImageBlock;
 import com.darwinfont.slackservice.client.dto.header.HeaderBlock;
+import com.darwinfont.slackservice.client.dto.section.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,7 @@ public class MessageModel {
 
         public MessageBuilder() {
             this.blocks = new ArrayList<>();
-            this.blocks.add(
-                    HeaderBlock
-                            .builder()
-                            .text(" ")
-                            .build()
-            );
+            this.blocks.add(HeaderBlock.builder().build());
             this.clean = true;
         }
 
@@ -75,6 +71,18 @@ public class MessageModel {
                 this.clean = false;
             } else {
                 this.blocks.add(image);
+            }
+
+            return this;
+        }
+
+        public MessageBuilder table(Table field) {
+            if (clean) {
+                this.blocks.clear();
+                this.blocks.add(field);
+                this.clean = false;
+            } else {
+                this.blocks.add(field);
             }
 
             return this;

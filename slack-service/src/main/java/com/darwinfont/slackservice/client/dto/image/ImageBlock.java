@@ -1,14 +1,14 @@
 package com.darwinfont.slackservice.client.dto.image;
 
 import com.darwinfont.slackservice.client.dto.type.BlockType;
-import com.darwinfont.slackservice.client.dto.text.TextBlock;
+import com.darwinfont.slackservice.client.dto.text.Text;
 import com.darwinfont.slackservice.client.dto.type.TextType;
 
 public class ImageBlock {
     private final String type;
-    private String image_url;
-    private String alt_text;
-    private TextBlock title;
+    private final String image_url;
+    private final String alt_text;
+    private final Text title;
 
     private ImageBlock(ImageBlockBuilder builder){
         this.type = BlockType.IMAGE;
@@ -23,12 +23,12 @@ public class ImageBlock {
     public static class ImageBlockBuilder {
         private String image_url;
         private String alt_text;
-        private TextBlock title;
+        private final Text title;
 
         public ImageBlockBuilder() {
             this.image_url = "";
             this.alt_text = "";
-            this.title = TextBlock.builder().type(TextType.TEXT).text(" ").build();
+            this.title = Text.builder().build();
         }
 
         public ImageBlockBuilder alt_text(String alt_text) {
@@ -60,7 +60,7 @@ public class ImageBlock {
     public String getAlt_text() {
         return this.alt_text;
     }
-    public TextBlock getTitle() {
+    public Text getTitle() {
         return this.title;
     }
 }
